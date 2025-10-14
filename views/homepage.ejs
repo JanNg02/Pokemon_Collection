@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Pokemon Collection App</title>
+    <!-- Link to your CSS file for Pokemon-themed styling -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- Basic inline styles for quick theming (updated for darker colors) -->
+    <style>
+        body {
+            background-color: #121212; /* Dark black background for a moody theme */
+            font-family: 'Arial', sans-serif; /* Keep it simple and readable */
+            color: #ffffff; /* White text for contrast on dark background */
+        }
+        header {
+            background-color: #333333; /* Dark gray for header */
+            padding: 20px;
+            text-align: center;
+            border-bottom: 5px solid #666666; /* Medium gray border for accent */
+        }
+        header h1 {
+            color: #e0e0e0; /* Light gray for header text, subtle and dark-themed */
+            font-size: 2.5em;
+            margin: 0;
+        }
+        nav a {
+            margin: 0 15px;
+            color: #ffffff; /* White text on buttons */
+            background-color: #666666; /* Dark gray buttons */
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        nav a:hover {
+            background-color: #999999; /* Lighter gray on hover for subtle interaction */
+        }
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+        .pokemon-card {
+            background-color: #1a1a1a; /* Very dark gray for cards */
+            border: 2px solid #666666; /* Medium gray border */
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px auto;
+            max-width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Darker shadow for depth */
+        }
+        footer {
+            background-color: #333333; /* Dark gray footer */
+            color: #ffffff; /* White text */
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Pokemon-themed header with a Pokeball image (replace with your image path) -->
+        <img src="/images/pokeball.png" alt="Pokeball" width="50" height="50">
+        <h1>Welcome to Pokemon Collection!</h1>
+        <nav>
+            <a href="/collection">View My Collection</a>
+            <a href="/add">Add a Pokemon</a>
+            <a href="/search">Search Pokemon</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="pokemon-card">
+            <h2>Catch 'em All!</h2>
+            <p>Build and manage your ultimate Pokemon collection. Track your favorites, level them up, and become a Pokemon Master!</p>
+            
+            <!-- Static content -->
+            <p>Welcome, Trainer! Log in to start your Pokemon adventure and build your collection.</p>
+            <a href="/login" class="btn">Log In</a>
+            <a href="/register" class="btn">Register</a>
+        </div>
+
+        <!-- Sample Pokemon showcase (static) -->
+        <h3>Featured Pokemon</h3>
+        <div>
+            <img src="/images/pikachu.png" alt="Pikachu" width="100" height="100">
+            <p>Pikachu - Electric Type</p>
+        </div>
+        <div>
+            <img src="/images/charmander.png" alt="Charmander" width="100" height="100">
+            <p>Charmander - Fire Type</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Pokemon Collection App. Gotta Catch 'Em All!</p>
+    </footer>
+</body>
+</html>
