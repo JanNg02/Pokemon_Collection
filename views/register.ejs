@@ -85,13 +85,13 @@
 <body>
   <div class="login-container">
     <img src="/images/pokeball.png" alt="Pokeball Logo">
-    <h2>Trainer Login</h2>
-    <p>Access your PokéCollector account to track your Pokémon.</p>
+    <h2>Trainer Registration</h2>
+    <p>Create your account to track your PokéCollection.</p>
 
-    <form action="/" method="get">
-      <input type="text" name="username" placeholder="Trainer Name"  required/>
-      <input type="password" name="password" placeholder="Password"  required/>
-      <button type="submit">Log In</button>
+    <form action="/registerUser" method="POST">
+      <input type="text" name="userName" id="userName" placeholder="Trainer Name" required/>
+      <input type="password" name="password" id="password" placeholder="Password" required/>
+      <button type="submit">Register</button>
     </form>
      
   </div>
