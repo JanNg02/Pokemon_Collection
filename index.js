@@ -6,6 +6,10 @@ const port = 3000;
 const router  = require('./routes.js');
 const bodyParser = require("body-parser"); 
 
+//sessions
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+
 //body parsers
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -28,6 +32,15 @@ try {
 } catch (e) {
     console.log("could not connect");
 }
+
+//Sessions
+app.use(session({
+    secret: process.env.SECRET,
+    store: MongoStore.create({mongoUrl: mongoAtlasUri}), //For Atlas
+    resave: false,
+    saveUninitialized: false,
+    cookies:  {secure: false, maxAge: 24 * 60 * 60 * 1000}
+}));
 
 // Start the server
 app.listen(port, () => {

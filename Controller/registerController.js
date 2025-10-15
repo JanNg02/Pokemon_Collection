@@ -21,8 +21,7 @@ const registerController = {
         }).then(async (result) => {
             console.log("Creating User is Successful");
             res.redirect('/login');
-        })
-        .catch((err) => {
+        }).catch((err) => {
             console.log("Creating UserFailed");
             console.log(err)
             res.redirect('/register');
