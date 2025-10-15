@@ -1,12 +1,20 @@
 const express = require('express');
 const app = express(); 
 
+function requireAuth(req, res, next) {
+  if (req.session.userID) {
+    next(); // User is authenticated, proceed to the next handler
+  } else {
+    res.redirect('/login'); // Redirect to login
+  }
+}
+
 const loginController = require('./Controller/loginController.js');
 const registerController = require('./Controller/registerController.js')
 const homepageController = require('./Controller/homepageController.js');
 
 //Landing Page
-app.get('/', homepageController.generateHomePage);
+app.get('/', requireAuth, homepageController.generateHomePage);
 
 //Login and Register
 app.get('/login', loginController.generateLoginPage);
