@@ -7,14 +7,16 @@ const registerController = {
     },
     registerUser: async function (req,res){
         var checkID = await users.countDocuments({}); 
-        var userName = req.body.userName; 
+        var email = req.body.email;
+        var userName = req.body.userName;  
         var password = req.body.password; 
 
         var setIdNum = checkID+1;
 
         const userCreate = await users.create({
             userID: setIdNum, 
-            userName: userName, 
+            email: email, 
+            userName, userName,
             password: password
         }).then(async (result) => {
             console.log("Creating User is Successful");
