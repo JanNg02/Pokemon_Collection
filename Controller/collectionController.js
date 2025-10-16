@@ -10,10 +10,6 @@ const setViewCardsController = {
 
         var collection = await collectionBinder.findOne({userID: currUser});
 
-        // if (!collection || !collection.collectionCards) {
-        //     return res.render('collectionPage', { cards: [] });
-        // }
-
         for (var i = 0; i < collection.collectionCards.length; i++) {
             try {
                 var card = await tcgdex.card.get(collection.collectionCards[i]);
@@ -24,8 +20,6 @@ const setViewCardsController = {
                 console.error(`Error fetching card ${collection.collectionCards[i]}:`, error);
             }
         }
-        //console.log(cards)
-        //res.redirect('/')
         res.render('collectionPage', { collection: collection, cards: cards });
     },
     addToCollection: async function (req, res) {
@@ -45,7 +39,7 @@ const setViewCardsController = {
                 {$push: {collectionCards: cardID}}
             );
             console.log("Card added to existing collection successfully");
-            res.redirect('/');
+            res.redirect('/viewCollection');
         } else {
             const createCollection = await collectionBinder.create({
                 binderID: currUserName+"Collection",
