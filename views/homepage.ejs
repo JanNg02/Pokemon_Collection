@@ -175,7 +175,7 @@
   <% if (sets && sets.length > 0) { %>
   <section class="featured">
     <% sets.forEach(set => { %>
-    <a href="<%= set.id %>" style="text-decoration: none; color: inherit;">
+    <a href="/setViewCards/<%=set.id%>" style="text-decoration: none; color: inherit;">
       <div class="pokemon-card">
         <img src="<%=set.logo%>.webp" alt="<%=set.name%> Logo" class ="imageLogo">
         <h3><%= set.name %></h3>

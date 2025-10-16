@@ -131,15 +131,15 @@
   <%- include('navbar.ejs') %>
 
   <header>
-    <h1><%= setName %> Cards</h1>
+    <h1><%=cards.name%> Cards</h1>
     <p>View all the cards in this set!</p>
   </header>
 
   <section class="collection-grid">
-    <% if (cards && cards.length > 0) { %>
-      <% cards.forEach(card => { %>
+    <% if (cards.cards && cards.cards.length > 0) { %>
+      <% cards.cards.forEach(card => { %>
       <div class="card">
-        <img src="<%= card.images.small %>" alt="<%= card.name %>">
+        <img src="<%=card.image%>/low.webp" alt="<%=card.name%>">
         <h3><%= card.name %></h3>
         <p><%= card.supertype %> - <%= card.subtypes ? card.subtypes.join(', ') : '' %></p>
       </div>
