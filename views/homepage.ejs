@@ -186,12 +186,14 @@
   <% if (sets && sets.length > 0) { %>
   <section class="featured">
     <% sets.forEach(set => { %>
-    <div class="pokemon-card">
-      <img src="<%= set.images.logo %>" alt="<%= set.name %> Logo">
-      <h3><%= set.name %></h3>
-      <p>Release Date: <%= set.releaseDate %></p>
-      <p>Series: <%= set.series %></p>
-    </div>
+    <a href="/setViewCards/<%= set.id %>" style="text-decoration: none; color: inherit;">
+      <div class="pokemon-card">
+        <img src="<%= set.images.logo %>" alt="<%= set.name %> Logo">
+        <h3><%= set.name %></h3>
+        <p>Release Date: <%= set.releaseDate %></p>
+        <p>Series: <%= set.series %></p>
+      </div>
+    </a>
     <% }); %>
   </section>
   <% } %>

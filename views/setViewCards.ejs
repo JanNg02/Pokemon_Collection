@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PokéCollector | My Collection</title>
+  <link rel="icon" href="/images/pokeball.png">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: linear-gradient(to bottom right, #fff9c4, #ffccbc, #bbdefb);
+      min-height: 100vh;
+      color: #333;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #d32f2f;
+    }
+
+    nav img {
+      width: 28px;
+      height: 28px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: #e53935;
+    }
+
+    header {
+      text-align: center;
+      padding: 3rem 1rem 1rem;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: #d32f2f;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      color: #555;
+      font-size: 1rem;
+    }
+
+    .collection-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 16px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      padding: 1rem;
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .card img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+    }
+
+    .card h3 {
+      margin: 0.5rem 0 0.2rem;
+      font-size: 1.2rem;
+      color: #222;
+    }
+
+    .card p {
+      margin: 0;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #666;
+      font-size: 0.85rem;
+      margin-top: 2rem;
+      background: rgba(255,255,255,0.6);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <img src="/images/pokeball.png" alt="PokéCollector Logo" />
+      PokéCollector
+    </div>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/collection">Collection</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <h1><%= setName %> Cards</h1>
+    <p>View all the cards in this set!</p>
+  </header>
+
+  <section class="collection-grid">
+    <% if (cards && cards.length > 0) { %>
+      <% cards.forEach(card => { %>
+      <div class="card">
+        <img src="<%= card.images.small %>" alt="<%= card.name %>">
+        <h3><%= card.name %></h3>
+        <p><%= card.supertype %> - <%= card.subtypes ? card.subtypes.join(', ') : '' %></p>
+      </div>
+      <% }); %>
+    <% } else { %>
+      <p>No cards found in this set.</p>
+    <% } %>
+  </section>
+
+  <footer>
+    © 2025 PokéCollector — Keep catching 'em all!
+  </footer>
+</body>
+</html>

@@ -10,8 +10,9 @@ function requireAuth(req, res, next) {
 }
 
 const loginController = require('./Controller/loginController.js');
-const registerController = require('./Controller/registerController.js')
+const registerController = require('./Controller/registerController.js');
 const homepageController = require('./Controller/homepageController.js');
+const setViewCardsController = require('./Controller/setViewCardsController.js');
 
 //Landing Page
 app.get('/', requireAuth, homepageController.generateHomePage);
@@ -22,5 +23,8 @@ app.post('/loginUser', loginController.loginUser);
 app.get('/logoutUser', loginController.logoutUser);
 app.get('/register',registerController.generateRegisterPage);
 app.post('/registerUser', registerController.registerUser);
+
+//set View Cards
+app.get('/setViewCards/:setId', setViewCardsController.generateViewPage);
 
 module.exports = app;
