@@ -60,6 +60,36 @@
       color: #e53935;
     }
 
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 1.6rem;
+      margin: 0.5rem;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background-color: #e53935;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #c62828;
+    }
+
+    .btn-outline {
+      border: 2px solid #e53935;
+      color: #e53935;
+    }
+
+    .btn-outline:hover {
+      background-color: #e53935;
+      color: white;
+    }
+
     header {
       text-align: center;
       padding: 3rem 1rem 1rem;
@@ -74,6 +104,11 @@
     header p {
       color: #555;
       font-size: 1rem;
+    }
+
+    header img {
+      width: 150px;
+      height: 150px;
     }
 
     .collection-grid {
@@ -131,6 +166,11 @@
   <%- include('navbar.ejs') %>
 
   <header>
+    <% if (cards.symbol != null) { %>
+      <img src="<%=cards.symbol%>.webp">
+    <% } else { %>
+      <img src="/images/tcgLogo.webp" alt="Pokeball Logo">
+    <% } %>
     <h1><%=cards.name%> Cards</h1>
     <p>View all the cards in this set!</p>
   </header>
@@ -141,7 +181,8 @@
       <div class="card">
         <img src="<%=card.image%>/low.webp" alt="<%=card.name%>">
         <h3><%= card.name %></h3>
-        <p><%= card.supertype %> - <%= card.subtypes ? card.subtypes.join(', ') : '' %></p>
+        <a href="#" class="btn btn-primary">Add to Collection</a>
+        <a href="#" class="btn btn-outline">Catch Pokémon</a>
       </div>
       <% }); %>
     <% } else { %>
