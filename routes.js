@@ -26,9 +26,10 @@ app.get('/register',registerController.generateRegisterPage);
 app.post('/registerUser', registerController.registerUser);
 
 //set View Cards
-app.get('/setViewCards/:setId', setViewCardsController.generateViewPage);
+app.get('/setViewCards/:setId', requireAuth, setViewCardsController.generateViewPage);
 
 //collection functions
+app.get('/viewCollection', collectionController.displayCollection);
 app.get('/addToCollection/:cardID', collectionController.addToCollection);
 
 module.exports = app;

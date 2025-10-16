@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PokéCollector | View Cards</title>
+  <title>PokéCollector | My Collection</title>
   <link rel="icon" href="/images/pokeball.png">
   <style>
     body {
@@ -95,20 +95,42 @@
       padding: 3rem 1rem 1rem;
     }
 
+    header {
+      text-align: center;
+      padding: 3rem 1rem 1rem;
+    }
+
     header h1 {
       font-size: 2.5rem;
       color: #d32f2f;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1rem;
     }
 
-    header p {
+    .user-info {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .user-info p {
       color: #555;
-      font-size: 1rem;
+      margin: 0.3rem 0;
     }
 
-    header img {
-      width: 150px;
-      height: 150px;
+    .binder-name {
+      display: inline-block;
+      background: rgba(255,255,255,0.8);
+      border-radius: 10px;
+      border: 2px solid #e53935;
+      padding: 0.6rem 1rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #333;
+      transition: border-color 0.2s;
+    }
+
+    .binder-name:focus {
+      outline: none;
+      border-color: #c62828;
     }
 
     .collection-grid {
@@ -166,18 +188,19 @@
   <%- include('navbar.ejs') %>
 
   <header>
-    <% if (cards.symbol != null) { %>
-      <img src="<%=cards.symbol%>.webp">
-    <% } else { %>
-      <img src="/images/tcgLogo.webp" alt="Pokeball Logo">
-    <% } %>
-    <h1><%=cards.name%> Cards</h1>
-    <p>View all the cards in this set!</p>
+    <h1>My Pokémon Binder</h1>
+    <div class="user-info">
+      <p><strong>Trainer:</strong> <%=collection.userName%></p>
+      <p>
+        <strong>Binder Name:</strong>
+        <input type="text" class="binder-name" value="<%=collection.binderName%>" />
+      </p>
+    </div>
   </header>
 
   <section class="collection-grid">
-    <% if (cards.cards && cards.cards.length > 0) { %>
-      <% cards.cards.forEach(card => { %>
+    <% if (cards && cards.length > 0) { %>
+      <% cards.forEach(card => { %>
       <div class="card">
         <img src="<%=card.image%>/low.webp" alt="<%=card.name%>">
         <h3><%= card.name %> </h3>

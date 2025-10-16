@@ -4,6 +4,30 @@ const tcgdex = new TCGdex('en');
 const collectionBinder = require('../Model/collectionModel.js');
 
 const setViewCardsController = {
+    displayCollection: async function (req, res) {
+        const currUser = req.session.userID;
+        var cards = [];
+
+        var collection = await collectionBinder.findOne({userID: currUser});
+
+        // if (!collection || !collection.collectionCards) {
+        //     return res.render('collectionPage', { cards: [] });
+        // }
+
+        for (var i = 0; i < collection.collectionCards.length; i++) {
+            try {
+                var card = await tcgdex.card.get(collection.collectionCards[i]);
+                if (card) {
+                    cards.push({ id: card.id, image: card.image, name: card.name });
+                }
+            } catch (error) {
+                console.error(`Error fetching card ${collection.collectionCards[i]}:`, error);
+            }
+        }
+        //console.log(cards)
+        //res.redirect('/')
+        res.render('collectionPage', { collection: collection, cards: cards });
+    },
     addToCollection: async function (req, res) {
         const currUser = req.session.userID;
         const currUserName = req.session.userName;
@@ -31,7 +55,7 @@ const setViewCardsController = {
                 collectionCards: collectionArray
             }).then(async (result) => {
                 console.log("Creating Collection is Successful");
-                res.redirect('/');
+                res.redirect('/viewCollection');
             }).catch((err) => {
                 console.log("Creating Collection Failed");
                 console.log(err)
