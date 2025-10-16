@@ -10,12 +10,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.12.2",
     "body-parser": "^2.2.0",
     "connect-mongo": "^5.1.0",
     "dotenv": "^17.2.3",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "express-session": "^1.18.2",
-    "mongoose": "^8.19.1"
+    "mongoose": "^8.19.1",
+    "pokemontcgsdk": "^2.0.0"
   }
 }
