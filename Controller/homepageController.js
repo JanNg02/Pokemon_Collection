@@ -13,7 +13,7 @@ const homepageController = {
                 .sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate))
                 .slice(0, 3);
 
-                console.log(latestSets); 
+            console.log(latestSets); 
 
             // Pass sets to the homepage view
             res.render('homepage', {sets: latestSets});
