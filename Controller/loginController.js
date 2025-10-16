@@ -1,8 +1,10 @@
 const { raw } = require('body-parser');
 const users = require('../Model/userModel.js');
+const TCGdex = require('@tcgdex/sdk').default;
+const tcgdex = new TCGdex('en');
 
 const loginController = {
-    generateLoginPage: function (req,res){
+    generateLoginPage:async  function (req,res){
         res.render('login');
     },
     loginUser: async function(req, res){

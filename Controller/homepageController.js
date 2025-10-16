@@ -1,33 +1,24 @@
-const { raw } = require('body-parser');
-const axios = require('axios');
-const pokemon = require('pokemontcgsdk');
+const TCGdex = require('@tcgdex/sdk').default;
+const tcgdex = new TCGdex('en');
 
 const homepageController = {
     generateHomePage: async function (req, res) {
         console.log("Session Username " + req.session.userName);
 
         try {
-            // Fetch the 3 latest sets
-            const setsResponse = await axios.get('https://api.pokemontcg.io/v2/sets', {
-                params: {
-                    orderBy: '-releaseDate',
-                    pageSize: 3,
-                    page: 1
-                },
-                headers: {
-                    'X-Api-Key': process.env.POKEMONAPI
-                }
-            });
-            console.log(setsResponse.data);
+            const sets = await tcgdex.fetch('sets');
+            
+            // Sort sets by releaseDate descending and get the latest 3
+            const latestSets = sets
+                .sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate))
+                .slice(0, 3);
 
-            // Ensure responses have data
-            const sets = setsResponse.data && setsResponse.data.data ? setsResponse.data.data : [];
+                console.log(latestSets); 
 
-            // Pass both cards and sets to the homepage view
-            res.render('homepage', {sets: sets});
+            // Pass sets to the homepage view
+            res.render('homepage', {sets: latestSets});
         } catch (error) {
-            console.error('Error fetching Pokemon data:', error);
-            //res.render('homepage', { cards: [], sets: [] });
+            console.error('Error fetching sets:', error);
             res.render('homepage', {sets: []});
         }
     }

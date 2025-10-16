@@ -142,7 +142,7 @@
 
     .pokemon-card h3 {
       margin-top: 0.5rem;
-      font-size: 1.2rem;
+      font-size: 1rem;
       color: #222;
     }
 
@@ -175,12 +175,11 @@
   <% if (sets && sets.length > 0) { %>
   <section class="featured">
     <% sets.forEach(set => { %>
-    <a href="/setViewCards/<%= set.id %>" style="text-decoration: none; color: inherit;">
+    <a href="<%= set.id %>" style="text-decoration: none; color: inherit;">
       <div class="pokemon-card">
-        <img src="<%= set.images.logo %>" alt="<%= set.name %> Logo">
+        <img src="<%=set.logo%>.webp" alt="<%=set.name%> Logo" class ="imageLogo">
         <h3><%= set.name %></h3>
-        <p>Release Date: <%= set.releaseDate %></p>
-        <p>Series: <%= set.series %></p>
+        <p>Total Cards: <%= set.cardCount.total %></p>
       </div>
     </a>
     <% }); %>

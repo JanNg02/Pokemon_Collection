@@ -1,5 +1,4 @@
 require('dotenv').config(); 
-const pokemon = require('pokemontcgsdk');
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
@@ -33,8 +32,6 @@ try {
 } catch (e) {
     console.log("could not connect");
 }
-
-pokemon.configure({apiKey: process.env.POKEMONAPI})
 
 //Sessions
 app.use(session({
