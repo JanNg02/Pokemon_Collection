@@ -56,6 +56,17 @@ const setViewCardsController = {
                 res.redirect('/');
             });
         }
+    },
+    deleteFromCollection: async function (req, res) {
+        const currUser = req.session.userID;
+        const cardID = req.params.cardID;
+
+        await collectionBinder.updateOne(
+            {userID: currUser},
+            {$pull: {collectionCards: cardID}}
+        );
+        console.log("Card removed from collection successfully");
+        res.redirect('/viewCollection');
     }
 }
 module.exports = setViewCardsController;
