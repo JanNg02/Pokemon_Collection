@@ -13,6 +13,7 @@ const loginController = require('./Controller/loginController.js');
 const registerController = require('./Controller/registerController.js');
 const homepageController = require('./Controller/homepageController.js');
 const setViewCardsController = require('./Controller/setViewCardsController.js');
+const collectionController = require('./Controller/collectionController.js');
 
 //Landing Page
 app.get('/', requireAuth, homepageController.generateHomePage);
@@ -26,5 +27,8 @@ app.post('/registerUser', registerController.registerUser);
 
 //set View Cards
 app.get('/setViewCards/:setId', setViewCardsController.generateViewPage);
+
+//collection functions
+app.get('/addToCollection/:cardID', collectionController.addToCollection);
 
 module.exports = app;
