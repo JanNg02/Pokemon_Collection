@@ -191,10 +191,13 @@
     <h1>My Pokémon Binder</h1>
     <div class="user-info">
       <p><strong>Trainer:</strong> <%=collection.userName%></p>
-      <p>
-        <strong>Binder Name:</strong>
-        <input type="text" class="binder-name" value="<%=collection.binderName%>" />
-      </p>
+      <form action="/updateBinderName" method="POST" style="display: inline;">
+        <p>
+          <strong>Binder Name:</strong>
+          <input type="text" name="binderName" class="binder-name" value="<%=collection.binderName%>" />
+          <button type="submit" class="btn btn-primary">Update Binder Name</button>
+        </p>
+      </form>
     </div>
   </header>
 
@@ -208,7 +211,7 @@
       </div>
       <% }); %>
     <% } else { %>
-      <p>No cards found in this set.</p>
+      <p>No cards found in your collection.</p>
     <% } %>
   </section>
 

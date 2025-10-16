@@ -67,6 +67,17 @@ const setViewCardsController = {
         );
         console.log("Card removed from collection successfully");
         res.redirect('/viewCollection');
+    },
+    updateBinderName: async function (req, res) {
+        const currUser = req.session.userID;
+        const newBinderName = req.body.binderName;
+
+        await collectionBinder.updateOne(
+            {userID: currUser},
+            {$set: {binderName: newBinderName}}
+        );
+        console.log("Binder name updated successfully");
+        res.redirect('/viewCollection');
     }
 }
 module.exports = setViewCardsController;

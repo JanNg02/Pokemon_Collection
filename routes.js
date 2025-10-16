@@ -32,5 +32,6 @@ app.get('/setViewCards/:setId', requireAuth, setViewCardsController.generateView
 app.get('/viewCollection', collectionController.displayCollection);
 app.get('/addToCollection/:cardID', collectionController.addToCollection);
 app.get('/deleteFromCollection/:cardID', collectionController.deleteFromCollection);
+app.post('/updateBinderName', requireAuth, collectionController.updateBinderName);
 
 module.exports = app;
