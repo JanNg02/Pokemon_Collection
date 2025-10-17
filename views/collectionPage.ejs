@@ -118,6 +118,12 @@
       gap: 1rem;
     }
 
+    .left-section {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
     .binder-header input {
       border: 2px solid #e53935;
       border-radius: 10px;
@@ -196,7 +202,13 @@
     <section class="binder-section">
       <% if (cards && cards.length > 0) { %>
       <div class="binder-header">
-        <h2><%=collection.userName%>'s Binder:</h2>
+        <div class="left-section">
+          <h2><%=collection.userName%>'s Binder:</h2>
+          <span id="likesCount">Likes: <%=collection.likes || 0%></span>
+          <% if (userCheck == false) { %>
+          <button id="likeBtn" class="btn btn-outline">Like</button>
+          <% } %>
+        </div>
         <form action="/updateBinderName" method="POST" style="display: inline;">
           <input type="text" name="binderName" class="binder-name" value="<%=collection.binderName%>" />
           <button type="submit" class="btn btn-primary">Update Binder Name</button>
@@ -223,5 +235,30 @@
   <footer>
     © 2025 PokéCollector — Keep catching 'em all!
   </footer>
+
+  <script>
+    document.getElementById('likeBtn').addEventListener('click', function() {
+      fetch('/likeCollection', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ binderID: '<%= collection.binderID %>' })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          document.getElementById('likesCount').textContent = 'Likes: ' + data.likes;
+          document.getElementById('likeBtn').style.display = 'none'; // Hide button after liking
+        } else {
+          alert('Failed to like the collection');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred');
+      });
+    });
+  </script>
 </body>
 </html>

@@ -29,6 +29,20 @@ const communityController = {
             }
         }
         res.render('collectionPage', { collection: collection, cards: cards, userCheck: userCheck});
+    },
+    likeCollection: async function (req, res) {
+        const binderID = req.body.binderID;
+        try {
+            await collectionBinder.updateOne(
+                { binderID: binderID },
+                { $inc: { likes: 1 } }
+            );
+            const updatedCollection = await collectionBinder.findOne({ binderID: binderID });
+            res.json({ success: true, likes: updatedCollection.likes });
+        } catch (error) {
+            console.error('Error liking collection:', error);
+            res.status(500).json({ success: false, message: 'Failed to like collection' });
+        }
     }
 
 }
