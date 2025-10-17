@@ -208,7 +208,9 @@
           <div class="card">
             <img src="<%=card.image%>/low.webp" alt="<%=card.name%>">
             <h3><%= card.name %> </h3>
-            <a href="/deleteFromCollection/<%=card.id%>" class="btn btn-primary">Remove from Collection</a>
+            <% if (userCheck == true) { %>
+              <a href="/deleteFromCollection/<%=card.id%>" class="btn btn-primary">Remove from Collection</a>
+            <% } %>
           </div>
         <% }); %>
       </div>

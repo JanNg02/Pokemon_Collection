@@ -6,6 +6,7 @@ const collectionBinder = require('../Model/collectionModel.js');
 const setViewCardsController = {
     displayCollection: async function (req, res) {
         const currUser = req.session.userID;
+        const userCheck = true; 
         var cards = [];
 
         var collection = await collectionBinder.findOne({userID: currUser});
@@ -28,7 +29,7 @@ const setViewCardsController = {
                 console.error(`Error fetching card ${collection.collectionCards[i]}:`, error);
             }
         }
-        res.render('collectionPage', { collection: collection, cards: cards });
+        res.render('collectionPage', {collection: collection, cards: cards, userCheck: userCheck});
     },
     addToCollection: async function (req, res) {
         const currUser = req.session.userID;

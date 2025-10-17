@@ -37,6 +37,7 @@ app.post('/updateBinderName', requireAuth, collectionController.updateBinderName
 
 //community features
 app.get('/viewCommunityPage',requireAuth,communityController.generateCommunityPage);
+app.get('/viewComCollection/:binderID', communityController.displayCommunityCollection);
 
 
 module.exports = app;
