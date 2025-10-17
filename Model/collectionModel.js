@@ -13,6 +13,9 @@ const collectionSchema = new mongoose.Schema({
     userName:{
         type: String
     },
+    likes: {
+        type: Number
+    },
     collectionCards: [String]
 });
 

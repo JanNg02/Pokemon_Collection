@@ -10,6 +10,14 @@ const setViewCardsController = {
 
         var collection = await collectionBinder.findOne({userID: currUser});
 
+        if (!collection) {
+            collection = {
+                collectionCards: [],
+                userName: req.session.userName,
+                binderName: 'My Collection'
+            };
+        }
+
         for (var i = 0; i < collection.collectionCards.length; i++) {
             try {
                 var card = await tcgdex.card.get(collection.collectionCards[i]);
@@ -46,6 +54,7 @@ const setViewCardsController = {
                 userID: currUser,
                 binderName: "Collection1",
                 userName: currUserName,
+                likes: 0,
                 collectionCards: collectionArray
             }).then(async (result) => {
                 console.log("Creating Collection is Successful");

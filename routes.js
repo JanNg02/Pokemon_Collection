@@ -14,6 +14,7 @@ const registerController = require('./Controller/registerController.js');
 const homepageController = require('./Controller/homepageController.js');
 const setViewCardsController = require('./Controller/setViewCardsController.js');
 const collectionController = require('./Controller/collectionController.js');
+const communityController = require('./Controller/communityController.js');
 
 //Landing Page
 app.get('/', requireAuth, homepageController.generateHomePage);
@@ -29,9 +30,13 @@ app.post('/registerUser', registerController.registerUser);
 app.get('/setViewCards/:setId', requireAuth, setViewCardsController.generateViewPage);
 
 //collection functions
-app.get('/viewCollection', collectionController.displayCollection);
-app.get('/addToCollection/:cardID', collectionController.addToCollection);
+app.get('/viewCollection',requireAuth,collectionController.displayCollection);
+app.get('/addToCollection/:cardID', requireAuth,collectionController.addToCollection);
 app.get('/deleteFromCollection/:cardID', collectionController.deleteFromCollection);
 app.post('/updateBinderName', requireAuth, collectionController.updateBinderName);
+
+//community features
+app.get('/viewCommunityPage',requireAuth,communityController.generateCommunityPage);
+
 
 module.exports = app;

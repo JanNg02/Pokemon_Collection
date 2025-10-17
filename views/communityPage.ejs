@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PokéCollector | Community</title>
+  <link rel="icon" href="/images/pokeball.png" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fff8e1, #ffccbc, #bbdefb);
+      background-attachment: fixed;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Nav bar*/
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #d32f2f;
+    }
+
+    nav img {
+      width: 28px;
+      height: 28px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: #e53935;
+    }
+
+    /* --- Page Container --- */
+    .container {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      text-align: center;
+      flex: 1;
+    }
+
+    h1 {
+      color: #d32f2f;
+      font-size: 2rem;
+      margin-bottom: 0.3rem;
+    }
+
+    p.subtitle {
+      color: #555;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+
+    /* --- Card Grid --- */
+    .collections-grid {
+      display: flex;
+      flex-direction: row;
+      gap: 1.5rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+      justify-content: flex-start;
+    }
+
+    .collection-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(6px);
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 280px;
+      padding: 1.5rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .collection-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .binder-name {
+      font-weight: 700;
+      color: #d32f2f;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .username {
+      color: #444;
+      font-size: 0.95rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .likes {
+      color: #f44336;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    button, a.btn {
+      border: none;
+      text-decoration: none;
+      color: white;
+      font-weight: 600;
+      border-radius: 10px;
+      padding: 0.6rem 1rem;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: background 0.2s ease;
+    }
+
+    .like-btn {
+      background-color: #e53935;
+    }
+
+    .like-btn:hover {
+      background-color: #c62828;
+    }
+
+    .view-btn {
+      background-color: #1976d2;
+    }
+
+    .view-btn:hover {
+      background-color: #1565c0;
+    }
+
+    /* --- Footer --- */
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #555;
+      margin-top: 3rem;
+      padding: 2rem 0;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(6px);
+    }
+  </style>
+</head>
+<body>
+  <%- include('navbar.ejs') %>
+
+  <div class="container">
+    <h1>Trainer Community</h1>
+    <p class="subtitle">Explore other trainers’ binders and show your support with a like!</p>
+
+    <div class="collections-grid">
+      <!-- Collection div -->
+      <% if (collections.length > 0) { %>
+      <% collections.forEach(collection => { %>
+        <div class="collection-card">
+            <div class="binder-name"><%=collection.binderName%></div>
+            <div class="username">by <%=collection.userName%></div>
+            <div class="likes">❤️ <%=collection.likes%> Likes</div>
+            <div class="actions">
+            <button class="like-btn">Like</button>
+            <a href="/view-collection" class="btn view-btn">View</a>
+            </div>
+        </div>
+      <% }); %>
+      <% } else { %>
+        <p>No cards found in the community.</p>
+      <% } %>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 PokéCollector — Connect with trainers and explore amazing collections!
+  </footer>
+</body>
+</html>
