@@ -12,6 +12,8 @@
       background: linear-gradient(to bottom right, #fff9c4, #ffccbc, #bbdefb);
       min-height: 100vh;
       color: #333;
+      display: flex;
+      flex-direction: column;
     }
 
     nav {
@@ -90,58 +92,61 @@
       color: white;
     }
 
-    header {
-      text-align: center;
-      padding: 3rem 1rem 1rem;
+    main {
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    header {
-      text-align: center;
-      padding: 3rem 1rem 1rem;
+    .binder-section {
+      background-color: rgba(255,255,255,0.9);
+      padding: 1.5rem 2rem;
+      border-radius: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 1100px;
     }
 
-    header h1 {
-      font-size: 2.5rem;
-      color: #d32f2f;
-      margin-bottom: 1rem;
-    }
-
-    .user-info {
-      text-align: center;
+    .binder-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
 
-    .user-info p {
-      color: #555;
-      margin: 0.3rem 0;
-    }
-
-    .binder-name {
-      display: inline-block;
-      background: rgba(255,255,255,0.8);
-      border-radius: 10px;
+    .binder-header input {
       border: 2px solid #e53935;
+      border-radius: 10px;
       padding: 0.6rem 1rem;
       font-size: 1.1rem;
       font-weight: 600;
-      color: #333;
-      transition: border-color 0.2s;
+      color: #e53935;
+      background: #fff;
+      width: 250px;
+      transition: all 0.2s ease;
     }
 
-    .binder-name:focus {
+    .binder-header input:focus {
       outline: none;
       border-color: #c62828;
+      background: #fff3f3;
     }
 
-    .collection-grid {
+    .binder-header h2 {
+      color: #333;
+      margin: 0;
+      font-size: 1.3rem;
+    }
+
+    .card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem;
-      padding: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
     }
-
     .card {
       background: rgba(255, 255, 255, 0.8);
       border-radius: 16px;
@@ -187,33 +192,31 @@
 <body>
   <%- include('navbar.ejs') %>
 
-  <header>
-    <h1>My Pokémon Binder</h1>
-    <div class="user-info">
-      <p><strong>Trainer:</strong> <%=collection.userName%></p>
-      <form action="/updateBinderName" method="POST" style="display: inline;">
-        <p>
-          <strong>Binder Name:</strong>
+  <main>
+    <section class="binder-section">
+      <% if (cards && cards.length > 0) { %>
+      <div class="binder-header">
+        <h2><%=collection.userName%>'s Binder:</h2>
+        <form action="/updateBinderName" method="POST" style="display: inline;">
           <input type="text" name="binderName" class="binder-name" value="<%=collection.binderName%>" />
           <button type="submit" class="btn btn-primary">Update Binder Name</button>
-        </p>
-      </form>
-    </div>
-  </header>
-
-  <section class="collection-grid">
-    <% if (cards && cards.length > 0) { %>
-      <% cards.forEach(card => { %>
-      <div class="card">
-        <img src="<%=card.image%>/low.webp" alt="<%=card.name%>">
-        <h3><%= card.name %> </h3>
-        <a href="/deleteFromCollection/<%=card.id%>" class="btn btn-primary">Remove from Collection</a>
+        </form>
       </div>
-      <% }); %>
-    <% } else { %>
-      <p>No cards found in your collection.</p>
-    <% } %>
-  </section>
+
+      <div class="card-grid">
+        <% cards.forEach(card => { %>
+          <div class="card">
+            <img src="<%=card.image%>/low.webp" alt="<%=card.name%>">
+            <h3><%= card.name %> </h3>
+            <a href="/deleteFromCollection/<%=card.id%>" class="btn btn-primary">Remove from Collection</a>
+          </div>
+        <% }); %>
+      </div>
+      <% } else { %>
+        <p>No cards found in your collection.</p>
+      <% } %>
+      </section>
+    </main>
 
   <footer>
     © 2025 PokéCollector — Keep catching 'em all!

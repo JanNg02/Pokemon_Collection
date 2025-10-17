@@ -12,6 +12,9 @@
       background: linear-gradient(to bottom right, #fff9c4, #ffccbc, #bbdefb);
       text-align: center;
       color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
     nav {
@@ -163,28 +166,26 @@
 <body>
   <%- include('navbar.ejs') %>
 
-  <section class="hero">
-    <h1>Catch 'Em All!</h1>
-    <p>Build your ultimate Pokémon collection, track your catches, and explore the world of Pokémon right from your Pokédex.</p>
-    <div class="buttons">
-      <a href="#" class="btn btn-primary">View Collection</a>
-      <a href="#" class="btn btn-outline">Catch Pokémon</a>
-    </div>
-  </section>
+  <main style="flex: 1;">
+    <section class="hero">
+      <h1>Catch 'Em All!</h1>
+      <p>Build your ultimate Pokémon collection, track your catches, and explore the world of Pokémon right from your Pokédex.</p>
+    </section>
 
-  <% if (sets && sets.length > 0) { %>
-  <section class="featured">
-    <% sets.forEach(set => { %>
-    <a href="/setViewCards/<%=set.id%>" style="text-decoration: none; color: inherit;">
-      <div class="pokemon-card">
-        <img src="<%=set.logo%>.webp" alt="<%=set.name%> Logo" class ="imageLogo">
-        <h3><%= set.name %></h3>
-        <p>Total Cards: <%= set.cardCount.total %></p>
-      </div>
-    </a>
-    <% }); %>
-  </section>
-  <% } %>
+    <% if (sets && sets.length > 0) { %>
+    <section class="featured">
+      <% sets.forEach(set => { %>
+      <a href="/setViewCards/<%=set.id%>" style="text-decoration: none; color: inherit;">
+        <div class="pokemon-card">
+          <img src="<%=set.logo%>.webp" alt="<%=set.name%> Logo" class ="imageLogo">
+          <h3><%= set.name %></h3>
+          <p>Total Cards: <%= set.cardCount.total %></p>
+        </div>
+      </a>
+      <% }); %>
+    </section>
+    <% } %>
+  </main>
   <footer>
     © 2025 PokéCollector — Made with ❤️ by Trainers.
   </footer>
